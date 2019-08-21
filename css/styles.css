@@ -1,0 +1,109 @@
+body{
+    font-family: cursive;
+    height: 100vh;
+    width: 100%;
+    margin: 0px;
+    overflow-x: hidden;
+    background: #f2f2f2;
+}
+
+
+/* Header CSS   Starts       */
+.header{
+    padding: 10px;
+    text-align: center;
+    height: 10vh;
+    width: 100%;
+}
+/* Header CSS Ends */
+
+
+/* Main Starts*/
+
+.container{
+    clear: both;
+    height: 85vh;
+    width: 100%;
+}
+
+
+/* Naviagation Bar CSS Starts */
+.navigation{
+    float: left;
+    width: 20%;
+    height: 85%;
+    background-color: rgb(255, 255, 255);
+    padding: 2%;
+    box-shadow: 0 4px 8px 0 rgba(10, 10, 10, 0.2);
+    margin: 1%;
+    font-size: 25px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0px; 
+}
+
+.navigation ul li {
+    text-align: center;
+    padding: 5%;
+    box-shadow: 0 2px 2px 0 rgb(219, 255, 255);
+    margin: 1%;
+    border: 0.01px solid #000000;
+}
+/* Navigation Bar CSS ends */
+/* Content Starts */
+.content{
+    float: left;
+    width: 69%;
+    height: 85%;
+    /* background-color: #c2eeee; */
+    padding: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 1%;
+    margin-left: 0%;
+}
+/* Content ends */
+/* Main ends */
+
+
+/* Footer CSS Starts */
+.footer{
+    background-color: rgb(206, 206, 194);
+    clear: both;
+    height: 5vh;
+    width: 100%;
+}
+
+/* Footer CSS Starts */
+
+
+/* One Class sinle functions */
+
+.active{
+    background-color: #bdf5f475;
+}
+
+th, td {
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    border: 0.01px solid #000000;
+    box-shadow: 0 2px 3px 0 rgb(180, 236, 236);
+  }
+
+  table{
+    border-collapse: separate;
+    border-spacing: 5px;
+  }
+
+  #myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 92%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }
