@@ -97,13 +97,28 @@ th, td {
     border-spacing: 5px;
   }
 
-  #myInput {
-    background-image: url('/css/searchicon.png');
-    background-position: 10px 12px;
-    background-repeat: no-repeat;
-    width: 92%;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
+  .input-field{
+        border: none;
+        width: 100%;
+        height: 100%;
+        padding: 2%;
+        padding-right: 0px;
+        border: none;
+        font-size: 20px;
   }
+
+  .search-box, .search-box td{
+      padding: 0px;
+      width: 100%;
+      /* height: 12vh; */
+      /* padding: 0%; */
+  }
+
+  .fa-trash:before {
+    content: "\f1f8";
+    padding: 16.1%;
+}
+
+.fa-plus{
+    display: none;
+}

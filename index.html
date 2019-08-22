@@ -31,21 +31,37 @@
             <div class="to-do">
                 
             
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-            
-                <table style="width:100%">
-                    <tr>
+                
+                <table class="task-table" style="width:100%">
+                    
+                    <tr class="search-box" >
+                        <td >
+                            <input class="input-field" type="textarea" placeholder="
+                            Type..." name="search-box">
+                        </td>
+                        <td>
+                            <i class="fa fa-plus icon" style="
+                            display: none;
+                        "></i>
+                            <i class="fa fa-search icon"></i>
+                        </td>
+
+                    </tr>
+
+                    <tr class="task-row">
                       <th>Task</th>
                       <th>Action</th> 
                     </tr>
+
                     <tr>
+                      <td style="display: none;">1</td>
                       <td>Complete CSS</td>
                       <td>
-                        <i class="fas fa-cloud"></i>
-                        <i class="fas fa-heart"></i>
-                        <i class="fas fa-car"></i>  
+                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-wrench"></i>
                       </td>
                     </tr>
+
                 </table>
 
             </div>
