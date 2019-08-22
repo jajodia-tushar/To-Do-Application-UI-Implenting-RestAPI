@@ -110,14 +110,12 @@ table{
 
 .search-box, .search-box td{
       padding: 0px;
-      width: 100%;
-      /* height: 12vh; */
-      /* padding: 0%; */
+      width: 86%;
 }
 
-.fa-trash:before {
+.fa-trash{
     content: "\f1f8";
-    padding: 16.1%;
+    padding: 3%;
 }
 
 .fa-plus{

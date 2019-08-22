@@ -41,8 +41,8 @@ function renderTaskInAsHTML(tasks){
                         <td style="display: none;">${taskNumber}</td>
                         <td>${task}</td>
                         <td>
-                            <i class="fa fa-trash" onclick="deleteItem(this);"></i>
-                            <i class="fa fa-wrench" onclick="modifyItem(this);"></i>
+                            <i class="fa fa-trash fa-2x" onclick="deleteItem(this);"></i>
+                            <i class="fa fa-wrench fa-2x" onclick="modifyItem(this);"></i>
                         </td>
                         </tr>`;
                         return row;
@@ -69,7 +69,7 @@ function modifyItem(element){
     let editField = element.parentNode.parentNode.children[1];
     let previousText = editField.innerHTML;
     let immediateParent = element.parentNode;
-    immediateParent.innerHTML = `<i class="fa fa-check" aria-hidden="true" onclick="editedButtonClicked(this)"></i>`;
+    immediateParent.innerHTML = `<i class="fa fa-check fa-2x" aria-hidden="true" onclick="editedButtonClicked(this)"></i>`;
     
     editField.innerHTML = `<input class="edit-field" type="textarea" value="${previousText}">`;
 }
@@ -87,7 +87,11 @@ function replaceValue(index, value){
 }
 
 
-function searchButtonClicked(){
+function searchButtonClicked(event){
+
+    if(event.keyCode == '13' && document.getElementsByClassName("fa-plus")[0].style.display == 'inline-block'){
+        addButtonClicked();
+    }
     let searchedText = getValueFromTextBox();
 
     if(searchedText.length == 0){
