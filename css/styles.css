@@ -1,3 +1,5 @@
+
+/* ==================================Global Level ==================================*/
 body{
     font-family: cursive;
     height: 100vh;
@@ -8,84 +10,40 @@ body{
 }
 
 
-/* Header CSS   Starts       */
+/* ============================ Header CSS   Starts ==========================================      */
 .header{
     padding: 10px;
     text-align: center;
     height: 10vh;
     width: 100%;
 }
-/* Header CSS Ends */
+/* ================================== Header CSS Ends ==================================*/
 
-
-/* Main Starts*/
 
 .container{
     clear: both;
     height: 85vh;
     width: 100%;
 }
+/* ==================================Global Level ==================================*/
 
 
-/* Naviagation Bar CSS Starts */
-.navigation{
-    float: left;
-    width: 20%;
-    height: 85%;
-    background-color: rgb(255, 255, 255);
-    padding: 2%;
-    box-shadow: 0 4px 8px 0 rgba(10, 10, 10, 0.2);
-    margin: 1%;
-    font-size: 25px;
-}
 
-.navigation ul {
-    list-style-type: none;
-    padding: 0px; 
-}
-
-.navigation ul li {
-    text-align: center;
-    padding: 5%;
-    box-shadow: 0 2px 2px 0 rgb(219, 255, 255);
-    margin: 1%;
-    border: 0.01px solid #000000;
-}
-/* Navigation Bar CSS ends */
-/* Content Starts */
+/*================================== All-Content Starts ===================================== */
 .content{
     float: left;
     width: 69%;
     height: 85%;
-    /* background-color: #c2eeee; */
     padding: 2%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: 1%;
     margin-left: 0%;
     overflow: auto;
 }
-/* Content ends */
-/* Main ends */
 
 
-/* Footer CSS Starts */
-.footer{
-    background-color: rgb(206, 206, 194);
-    clear: both;
-    height: 5vh;
-    width: 100%;
-}
-
-/* Footer CSS Starts */
-
-
-/* One Class sinle functions */
-
-.active{
-    background-color: #bdf5f475;
-}
-
-th, td {
+/* ================================== To-DO Content Ends Here  ==================================*/
+.task-table th, .task-table td {
     background-color: white;
     text-align: center;
     padding: 10px;
@@ -113,6 +71,88 @@ table{
       width: 86%;
 }
 
+.edit-field{
+        border: none;
+        width: 100%;
+        height: 100%;
+        background-color: #dcecec;
+        padding: 1%;
+        padding-right: 0px;
+        border: none;
+        font-size: 20px;
+}
+/* ================================== To-DO Content Ends Here  ==================================*/
+
+
+/* ================================== Users Content Ends Here  ==================================*/
+/* ================================== Users Content Ends Here  ==================================*/
+
+/* ================================== Contacts Content Ends Here  ==================================*/
+/* ================================== Contacts Content Ends Here  ==================================*/
+
+
+/* ==================================All-Content Ends Here ==================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================Naviagation Bar CSS Starts==================================== */ 
+.navigation{
+    float: left;
+    width: 20%;
+    height: 85%;
+    background-color: rgb(255, 255, 255);
+    padding: 2%;
+    box-shadow: 0 4px 8px 0 rgba(10, 10, 10, 0.2);
+    margin: 1%;
+    font-size: 25px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0px; 
+}
+
+.navigation ul li {
+    text-align: center;
+    padding: 5%;
+    box-shadow: 0 2px 2px 0 rgb(219, 255, 255);
+    margin: 1%;
+    border: 0.01px solid #000000;
+}
+/* ===============================Navigation Bar CSS ends======================================== */
+
+
+
+
+
+
+
+/* =============================== Footer CSS Starts ===============================*/
+.footer{
+    background-color: rgb(206, 206, 194);
+    clear: both;
+    height: 5vh;
+    width: 100%;
+}
+
+/*=============================== Footer CSS Starts ===============================*/
+
+
+
+
+
+/* ===============================  Font-Awesome Modified  =============================== */
 .fa-trash{
     content: "\f1f8";
     padding: 3%;
@@ -126,13 +166,8 @@ table{
     display: inline-block;
 }
 
-.edit-field{
-        border: none;
-        width: 100%;
-        height: 100%;
-        background-color: #dcecec;
-        padding: 1%;
-        padding-right: 0px;
-        border: none;
-        font-size: 20px;
+
+/* ================================= Simple Helper Classes CSS ====================================*/
+.active{
+    background-color: #bdf5f475;
 }
