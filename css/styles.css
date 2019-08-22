@@ -81,13 +81,23 @@ table{
         border: none;
         font-size: 20px;
 }
+
+.to-do{
+    /* display: none; */
+}
 /* ================================== To-DO Content Ends Here  ==================================*/
 
 
 /* ================================== Users Content Ends Here  ==================================*/
+.users{
+    display: none;
+}
 /* ================================== Users Content Ends Here  ==================================*/
 
 /* ================================== Contacts Content Ends Here  ==================================*/
+.contact-us{
+    display: none;
+}
 /* ================================== Contacts Content Ends Here  ==================================*/
 
 

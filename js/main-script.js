@@ -1,3 +1,4 @@
+
 var tasks = [];
 
 function renderTaskInAsHTML(tasks){
@@ -100,6 +101,39 @@ function deleteItem(element){
     let indexInTasks = element.parentNode.parentNode.childNodes[0].innerText;
     tasks.splice(indexInTasks,1);
     renderTaskInAsHTML(tasks);
+}
+
+function navButtonClicked(element){
+    hideAllContentAndActiveClasses();
+    element.classList.add("active");
+
+    switch(element.innerHTML.toLowerCase()){
+        case 'to-do':
+                document.getElementsByClassName("to-do")[0].style.display = 'block';
+            break;
+        case 'users':
+                document.getElementsByClassName("users")[0].style.display = 'block';
+            break;
+        case 'contact-us':
+                document.getElementsByClassName("contact-us")[0].style.display = 'block';
+                break;
+    }
+
+    function hideAllContentAndActiveClasses(){
+        let toDo = document.getElementsByClassName("to-do")[0];
+        let users = document.getElementsByClassName("users")[0];
+        let contactUs = document.getElementsByClassName("contact-us")[0];
+
+        toDo.style.display = 'none';
+        users.style.display = 'none';
+        contactUs.style.display = 'none';
+
+        let navElements = element.parentNode.children;
+        for(let i =0; i < navElements.length;i++){
+            navElements[i].classList.remove("active");
+        }
+    }
+
 }
 
 
