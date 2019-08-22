@@ -62,6 +62,7 @@ body{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: 1%;
     margin-left: 0%;
+    overflow: auto;
 }
 /* Content ends */
 /* Main ends */
@@ -92,12 +93,12 @@ th, td {
     box-shadow: 0 2px 3px 0 rgb(180, 236, 236);
   }
 
-  table{
+table{
     border-collapse: separate;
     border-spacing: 5px;
-  }
+}
 
-  .input-field{
+.input-field{
         border: none;
         width: 100%;
         height: 100%;
@@ -107,20 +108,24 @@ th, td {
         font-size: 20px;
   }
 
-  .search-box, .search-box td{
+.search-box, .search-box td{
       padding: 0px;
       width: 100%;
       /* height: 12vh; */
       /* padding: 0%; */
-  }
+}
 
-  .fa-trash:before {
+.fa-trash:before {
     content: "\f1f8";
     padding: 16.1%;
 }
 
-.inactive{
+.fa-plus{
     display: none;
+}
+
+.fa-search{
+    display: inline-block;
 }
 
 .edit-field{

@@ -2,21 +2,28 @@ var tasks = [];
 
 function addButtonClicked(){
     addTaskInStorage();
-    renderTaskInAsHTML();
+    renderTaskInAsHTML(tasks);
+    AddButtonHide();
+    searchButtonShow();
 }
 
 function addTaskInStorage(){
     let task = getValueFromTextBox();
+    clearSearchFiedl();
     tasks.push(task);
 
-    function getValueFromTextBox(){
-        let text = document.getElementsByClassName("input-field")[0].value;
-        document.getElementsByClassName("input-field")[0].value ="";
-        return text;
-    }
 }
 
-function renderTaskInAsHTML(){
+function getValueFromTextBox(){
+    let text = document.getElementsByClassName("input-field")[0].value;
+    return text;
+}
+
+function clearSearchFiedl(){
+    document.getElementsByClassName("input-field")[0].value = "";
+}
+
+function renderTaskInAsHTML(tasks){
     removeOldRows();
     for(let i = 0; i < tasks.length; i++){
         let row = makeRowHTML(i,tasks[i]);
@@ -55,7 +62,7 @@ function renderTaskInAsHTML(){
 function deleteItem(element){
     let indexInTasks = element.parentNode.parentNode.childNodes[0].innerText;
     tasks.splice(indexInTasks,1);
-    renderTaskInAsHTML();
+    renderTaskInAsHTML(tasks);
 }
 
 function modifyItem(element){
@@ -76,6 +83,55 @@ function editedButtonClicked(element){
 
 function replaceValue(index, value){
     tasks[index] = value;
-    renderTaskInAsHTML(); 
+    renderTaskInAsHTML(tasks); 
+}
+
+
+function searchButtonClicked(){
+    let searchedText = getValueFromTextBox();
+
+    if(searchedText.length == 0){
+        searchButtonShow();
+        AddButtonHide();
+        renderTaskInAsHTML(tasks);
+        return;
+    }
+
+    let tempTask = [];
+
+    for(let i in tasks){
+        if(tasks[i].startsWith(searchedText)){
+            tempTask.push(tasks[i]);
+        }
+    }
+
+    if(tempTask.length == 0){
+        AddButtonShow();
+        searchButtonHide();
+    }
+    
+    renderTaskInAsHTML(tempTask)
+    
+}
+
+
+function AddButtonHide(){
+    let addButton = document.getElementsByClassName("fa-plus")[0];
+    addButton.style.display = 'none';
+}
+
+function AddButtonShow(){
+    let addButton = document.getElementsByClassName("fa-plus")[0];
+    addButton.style.display = 'inline-block';
+}
+
+function searchButtonHide(){
+    let addButton = document.getElementsByClassName("fa-search")[0];
+    addButton.style.display = 'none';
+}
+
+function searchButtonShow(){
+    let addButton = document.getElementsByClassName("fa-search")[0];
+    addButton.style.display = 'inline-block';
 }
 

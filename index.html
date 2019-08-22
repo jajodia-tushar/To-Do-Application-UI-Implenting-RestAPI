@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To-Do Application</title>
 
-    <link type="text/css" rel="stylesheet" href="css/styles.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script type="text/javascript" src="js/main-script.js"></script>
+    
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
 </head>
 <body>
    
@@ -37,11 +38,11 @@
                     <tr class="search-box" >
                         <td >
                             <input class="input-field" type="textarea" placeholder="
-                            Type..." name="search-box">
+                            Type..." name="search-box" onkeyup="searchButtonClicked();">
                         </td>
                         <td>
-                            <i class="fa fa-plus icon" onclick="addButtonClicked();" ></i>
-                            <i class="fa fa-search icon"></i>
+                            <i class="fa fa-plus fa-2x icon inactive" onclick="addButtonClicked();" ></i>
+                            <i class="fa fa-search fa-2x icon"></i>
                         </td>
 
                     </tr>
