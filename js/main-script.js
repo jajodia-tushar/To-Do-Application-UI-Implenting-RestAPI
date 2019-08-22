@@ -11,6 +11,7 @@ function addTaskInStorage(){
 
     function getValueFromTextBox(){
         let text = document.getElementsByClassName("input-field")[0].value;
+        document.getElementsByClassName("input-field")[0].value ="";
         return text;
     }
 }
@@ -33,8 +34,8 @@ function renderTaskInAsHTML(){
                         <td style="display: none;">${taskNumber}</td>
                         <td>${task}</td>
                         <td>
-                        <i class="fa fa-trash" onclick="deleteItem(this);"></i>
-                        <i class="fa fa-wrench" onclick="modifyItem(this);"></i>
+                            <i class="fa fa-trash" onclick="deleteItem(this);"></i>
+                            <i class="fa fa-wrench" onclick="modifyItem(this);"></i>
                         </td>
                         </tr>`;
                         return row;
@@ -52,13 +53,29 @@ function renderTaskInAsHTML(){
 }
 
 function deleteItem(element){
-    let indexInTasks = element.parentNode.parentNode.firstElementChild.innerText;
+    let indexInTasks = element.parentNode.parentNode.childNodes[0].innerText;
     tasks.splice(indexInTasks,1);
     renderTaskInAsHTML();
 }
 
+function modifyItem(element){
+    let editField = element.parentNode.parentNode.children[1];
+    let previousText = editField.innerHTML;
+    let immediateParent = element.parentNode;
+    immediateParent.innerHTML = `<i class="fa fa-check" aria-hidden="true" onclick="editedButtonClicked(this)"></i>`;
+    
+    editField.innerHTML = `<input class="edit-field" type="textarea" value="${previousText}">`;
+}
 
 
+function editedButtonClicked(element){
+    let updatedValue = element.parentNode.parentNode.children[1].children[0].value;
+    let indexInTasks = element.parentNode.parentNode.children[0].innerText;
+    replaceValue(indexInTasks,updatedValue);
+}
 
-
+function replaceValue(index, value){
+    tasks[index] = value;
+    renderTaskInAsHTML(); 
+}
 

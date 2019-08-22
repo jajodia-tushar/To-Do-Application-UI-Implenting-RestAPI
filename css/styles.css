@@ -122,3 +122,14 @@ th, td {
 .inactive{
     display: none;
 }
+
+.edit-field{
+        border: none;
+        width: 100%;
+        height: 100%;
+        background-color: #dcecec;
+        padding: 1%;
+        padding-right: 0px;
+        border: none;
+        font-size: 20px;
+}
