@@ -1,5 +1,34 @@
+let url = "http://localhost:8080/api/to-do/tasks";
 
 var tasks = [];
+
+getThePreviousDataFromAPI()
+.then((data) =>{
+    tasks = convertJSONToArray(data);
+    console.log(tasks);
+})
+
+function getThePreviousDataFromAPI(){
+    return new Promise(function(resolve,reject)
+    {
+        fetch(url,{
+            method: 'GET',
+            headers : { "content-type" : "application/json;" }
+        })
+        .then((res) => res.json())
+        .then((data)=> resolve(data))
+        .catch((data) => reject(data))
+    })
+}
+
+
+function convertJSONToArray(arrayObj){
+    let taskNew = [];
+    for(let i = 0; i < arrayObj.length; i++){
+        taskNew.push(arrayObj[i]["data"]);
+    }
+    return taskNew;
+}
 
 function renderTaskInAsHTML(tasks){
     removeOldRows();
