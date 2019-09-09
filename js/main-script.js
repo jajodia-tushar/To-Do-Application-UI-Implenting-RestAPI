@@ -108,37 +108,17 @@ function editedButtonClicked(element){
     let updatedValue = element.parentNode.parentNode.children[1].children[0].value;
     let indexInTasks = element.parentNode.parentNode.children[0].innerText;
     let previousValue = tasks[indexInTasks];
-
-    fetch(url,{
-        method: 'PUT',
-        headers : { "content-type" : "application/json;" },
-        body:JSON.stringify(
-            [
-                {
-                    id: indexInTasks,
-                    data:previousValue
-                },
-                {
-                    id: indexInTasks,
-                    data:updatedValue
-                }
-            ])
-    })
-    .then((res) => res.json())
-    .then((data)=> {
-        if(data["message"] == "Success"){
-            getTheDataFromAPI()
-            .then((data) =>{
-            tasks = convertJSONToArray(data);
-            renderTaskInAsHTML(tasks);
-        })
+    let data = [
+        {
+            id : indexInTasks,
+            data :previousValue
+        },
+        {
+            id : indexInTasks,
+            data : updatedValue
         }
-        else if(data["message"] == "failed")
-            throw "failed";
-    })
-    .catch((data) => {
-        console.log(data);
-    })
+    ]
+    APIOperation("PUT",data);
 }
 
 function modifyItem(element){
@@ -153,31 +133,12 @@ function modifyItem(element){
 function deleteItem(element){
     let task = element.parentNode.parentNode.childNodes[3].innerText;
     let indexInTasks = element.parentNode.parentNode.childNodes[1].innerText;
-    
-    fetch(url,{
-        method: 'DELETE',
-        headers : { "content-type" : "application/json;" },
-        body:JSON.stringify(
-                {
-                    id: indexInTasks,
-                    data:task
-                })
-    })
-    .then((res) => res.json())
-    .then((data)=> {
-        if(data["message"] == "Success"){
-            getTheDataFromAPI()
-            .then((data) =>{
-            tasks = convertJSONToArray(data);
-            renderTaskInAsHTML(tasks);
-        })
-        }
-        else if(data["message"] == "failed")
-            throw "failed";
-    })
-    .catch((data) => {
-        console.log(data);
-    })
+
+    let data = {
+        id : indexInTasks,
+        data : task
+    }
+    APIOperation("DELETE",data);
 }
 
 function navButtonClicked(element){
@@ -247,11 +208,19 @@ function clearSearchFiedl(){
 
 function addTaskInStorage(){
     let task = getValueFromTextBox();
+    let data = {
+        id : "",
+        data : task
+    }
     clearSearchFiedl();
+    APIOperation("POST",data);
+}
+
+function APIOperation(method,data){
     fetch(url,{
-        method: 'POST',
+        method: method,
         headers : { "content-type" : "application/json;" },
-        body:JSON.stringify({data:task})
+        body:JSON.stringify(data)
     })
     .then((res) => res.json())
     .then((data)=> {
@@ -268,4 +237,5 @@ function addTaskInStorage(){
     .catch((data) => {
         console.log(data);
     })
+
 }
