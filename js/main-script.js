@@ -151,9 +151,33 @@ function modifyItem(element){
 }
 
 function deleteItem(element){
-    let indexInTasks = element.parentNode.parentNode.childNodes[0].innerText;
-    tasks.splice(indexInTasks,1);
-    renderTaskInAsHTML(tasks);
+    let task = element.parentNode.parentNode.childNodes[3].innerText;
+    let indexInTasks = element.parentNode.parentNode.childNodes[1].innerText;
+    
+    fetch(url,{
+        method: 'DELETE',
+        headers : { "content-type" : "application/json;" },
+        body:JSON.stringify(
+                {
+                    id: indexInTasks,
+                    data:task
+                })
+    })
+    .then((res) => res.json())
+    .then((data)=> {
+        if(data["message"] == "Success"){
+            getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);
+        })
+        }
+        else if(data["message"] == "failed")
+            throw "failed";
+    })
+    .catch((data) => {
+        console.log(data);
+    })
 }
 
 function navButtonClicked(element){
