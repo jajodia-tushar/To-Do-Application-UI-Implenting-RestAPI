@@ -107,13 +107,38 @@ function addButtonClicked(){
 function editedButtonClicked(element){
     let updatedValue = element.parentNode.parentNode.children[1].children[0].value;
     let indexInTasks = element.parentNode.parentNode.children[0].innerText;
-    replaceValue(indexInTasks,updatedValue);
+    let previousValue = tasks[indexInTasks];
 
-    function replaceValue(index, value){
-        tasks[index] = value;
-        renderTaskInAsHTML(tasks); 
-    }
-    
+    fetch(url,{
+        method: 'PUT',
+        headers : { "content-type" : "application/json;" },
+        body:JSON.stringify(
+            [
+                {
+                    id: indexInTasks,
+                    data:previousValue
+                },
+                {
+                    id: indexInTasks,
+                    data:updatedValue
+                }
+            ])
+    })
+    .then((res) => res.json())
+    .then((data)=> {
+        if(data["message"] == "Success"){
+            getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);
+        })
+        }
+        else if(data["message"] == "failed")
+            throw "failed";
+    })
+    .catch((data) => {
+        console.log(data);
+    })
 }
 
 function modifyItem(element){
