@@ -118,7 +118,14 @@ function editedButtonClicked(element){
             data : updatedValue
         }
     ]
-    APIOperation("PUT",data);
+    APIOperation("PUT",data)
+    .then((data) =>{
+        getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);})
+        })
+    .catch((data)=>console.log(data));
 }
 
 function modifyItem(element){
@@ -138,7 +145,14 @@ function deleteItem(element){
         id : indexInTasks,
         data : task
     }
-    APIOperation("DELETE",data);
+    APIOperation("DELETE",data)
+    .then((data) =>{
+        getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);})
+        })
+    .catch((data)=>console.log(data));
 }
 
 function navButtonClicked(element){
@@ -213,11 +227,19 @@ function addTaskInStorage(){
         data : task
     }
     clearSearchFiedl();
-    APIOperation("POST",data);
+    APIOperation("POST",data)
+    .then((data) =>{
+        getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);})
+        })
+    .catch((data)=>console.log(data));
 }
 
 function APIOperation(method,data){
-    fetch(url,{
+    return new Promise(function(resolve,reject){
+        fetch(url,{
         method: method,
         headers : { "content-type" : "application/json;" },
         body:JSON.stringify(data)
@@ -225,17 +247,13 @@ function APIOperation(method,data){
     .then((res) => res.json())
     .then((data)=> {
         if(data["message"] == "Success"){
-            getTheDataFromAPI()
-            .then((data) =>{
-            tasks = convertJSONToArray(data);
-            renderTaskInAsHTML(tasks);
-        })
+            resolve("Success")
         }
         else if(data["message"] == "failed")
-            throw "failed";
+            reject("Failed")
     })
     .catch((data) => {
         console.log(data);
     })
-
+    });
 }
