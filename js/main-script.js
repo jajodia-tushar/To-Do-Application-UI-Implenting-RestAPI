@@ -2,13 +2,13 @@ let url = "http://localhost:8080/api/to-do/tasks";
 
 var tasks = [];
 
-getThePreviousDataFromAPI()
+getTheDataFromAPI()
 .then((data) =>{
     tasks = convertJSONToArray(data);
-    console.log(tasks);
+    renderTaskInAsHTML(tasks);
 })
 
-function getThePreviousDataFromAPI(){
+function getTheDataFromAPI(){
     return new Promise(function(resolve,reject)
     {
         fetch(url,{
@@ -67,7 +67,6 @@ function renderTaskInAsHTML(tasks){
 }
 
 // Button Events
-
 function searchButtonClicked(event){
     if(event.keyCode == '13' && document.getElementsByClassName("fa-plus")[0].style.display == 'inline-block'){
         addButtonClicked();
@@ -200,5 +199,24 @@ function clearSearchFiedl(){
 function addTaskInStorage(){
     let task = getValueFromTextBox();
     clearSearchFiedl();
-    tasks.push(task);
+    fetch(url,{
+        method: 'POST',
+        headers : { "content-type" : "application/json;" },
+        body:JSON.stringify({data:task})
+    })
+    .then((res) => res.json())
+    .then((data)=> {
+        if(data["message"] == "Success"){
+            getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);
+        })
+        }
+        else if(data["message"] == "failed")
+            throw "failed";
+    })
+    .catch((data) => {
+        console.log(data);
+    })
 }
