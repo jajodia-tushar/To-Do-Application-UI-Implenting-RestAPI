@@ -1,5 +1,34 @@
+let url = "http://localhost:8080/api/to-do/tasks";
 
 var tasks = [];
+
+getTheDataFromAPI()
+.then((data) =>{
+    tasks = convertJSONToArray(data);
+    renderTaskInAsHTML(tasks);
+})
+
+function getTheDataFromAPI(){
+    return new Promise(function(resolve,reject)
+    {
+        fetch(url,{
+            method: 'GET',
+            headers : { "content-type" : "application/json;" }
+        })
+        .then((res) => res.json())
+        .then((data)=> resolve(data))
+        .catch((data) => reject(data))
+    })
+}
+
+
+function convertJSONToArray(arrayObj){
+    let taskNew = [];
+    for(let i = 0; i < arrayObj.length; i++){
+        taskNew.push(arrayObj[i]["data"]);
+    }
+    return taskNew;
+}
 
 function renderTaskInAsHTML(tasks){
     removeOldRows();
@@ -38,7 +67,6 @@ function renderTaskInAsHTML(tasks){
 }
 
 // Button Events
-
 function searchButtonClicked(event){
     if(event.keyCode == '13' && document.getElementsByClassName("fa-plus")[0].style.display == 'inline-block'){
         addButtonClicked();
@@ -79,13 +107,25 @@ function addButtonClicked(){
 function editedButtonClicked(element){
     let updatedValue = element.parentNode.parentNode.children[1].children[0].value;
     let indexInTasks = element.parentNode.parentNode.children[0].innerText;
-    replaceValue(indexInTasks,updatedValue);
-
-    function replaceValue(index, value){
-        tasks[index] = value;
-        renderTaskInAsHTML(tasks); 
-    }
-    
+    let previousValue = tasks[indexInTasks];
+    let data = [
+        {
+            id : indexInTasks,
+            data :previousValue
+        },
+        {
+            id : indexInTasks,
+            data : updatedValue
+        }
+    ]
+    APIOperation("PUT",data)
+    .then((data) =>{
+        getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);})
+        })
+    .catch((data)=>console.log(data));
 }
 
 function modifyItem(element){
@@ -98,9 +138,21 @@ function modifyItem(element){
 }
 
 function deleteItem(element){
-    let indexInTasks = element.parentNode.parentNode.childNodes[0].innerText;
-    tasks.splice(indexInTasks,1);
-    renderTaskInAsHTML(tasks);
+    let task = element.parentNode.parentNode.childNodes[3].innerText;
+    let indexInTasks = element.parentNode.parentNode.childNodes[1].innerText;
+
+    let data = {
+        id : indexInTasks,
+        data : task
+    }
+    APIOperation("DELETE",data)
+    .then((data) =>{
+        getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);})
+        })
+    .catch((data)=>console.log(data));
 }
 
 function navButtonClicked(element){
@@ -170,6 +222,38 @@ function clearSearchFiedl(){
 
 function addTaskInStorage(){
     let task = getValueFromTextBox();
+    let data = {
+        id : "",
+        data : task
+    }
     clearSearchFiedl();
-    tasks.push(task);
+    APIOperation("POST",data)
+    .then((data) =>{
+        getTheDataFromAPI()
+            .then((data) =>{
+            tasks = convertJSONToArray(data);
+            renderTaskInAsHTML(tasks);})
+        })
+    .catch((data)=>console.log(data));
+}
+
+function APIOperation(method,data){
+    return new Promise(function(resolve,reject){
+        fetch(url,{
+        method: method,
+        headers : { "content-type" : "application/json;" },
+        body:JSON.stringify(data)
+    })
+    .then((res) => res.json())
+    .then((data)=> {
+        if(data["message"] == "Success"){
+            resolve("Success")
+        }
+        else if(data["message"] == "failed")
+            reject("Failed")
+    })
+    .catch((data) => {
+        console.log(data);
+    })
+    });
 }
